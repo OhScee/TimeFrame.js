@@ -6,6 +6,7 @@
 //ending cal
 //associated button
 var cal = function(strt, nd, startButt, endButt){
+	var calendar = this; //current object
 	var start = strt,
 		startButton = startButt,
 	    end = nd,
@@ -14,7 +15,9 @@ var cal = function(strt, nd, startButt, endButt){
 	var sdate = null,
 		edate = null;
 
+	this.firstSelected = false;
 	this.bothSelected = false; //check to see if both calendars have dates selected
+							   //you can set an external listener onto the related input  fields and buttons
 
 	var startSelect = null;
 	function endDate(){
@@ -25,13 +28,11 @@ var cal = function(strt, nd, startButt, endButt){
 	}
 	start.datepicker({
 		gotoCurrent: true,
-		minDate: new Date(),
 		onSelect(dateText){
 			sdate = dateText;
-			
+			calendar.firstSelected = true;
 			if(endDate() !== null){
 				var fd = sdate.split("/");
-				console.log(fd);
 				var ed = edate.split("/");
 
 				if(fd[2] > ed[2] || fd[0] > ed[0] || fd[1] > ed[1]){
@@ -44,7 +45,7 @@ var cal = function(strt, nd, startButt, endButt){
 				minDate: sdate,
 				onSelect(dt){
 					edate = dt;
-					this.bothSelected = true;
+					calendar.bothSelected = true;
 				}
 			});
 
