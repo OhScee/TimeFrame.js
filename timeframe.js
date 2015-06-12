@@ -11,21 +11,39 @@ var cal = function(strt, nd, startButt, endButt){
 	    end = nd,
 		endButton = endButt;
 
+	var sdate = null,
+		edate = null;
+
 	this.bothSelected = false; //check to see if both calendars have dates selected
 
 	var startSelect = null;
-
+	function endDate(){
+		return end.datepicker("getDate");
+	}
+	function startDate(){
+		return start.datepicker("getDate");
+	}
 	start.datepicker({
 		gotoCurrent: true,
 		minDate: new Date(),
-
 		onSelect(dateText){
-			date = dateText;
+			sdate = dateText;
+			
+			if(endDate() !== null){
+				var fd = sdate.split("/");
+				console.log(fd);
+				var ed = edate.split("/");
+
+				if(fd[2] > ed[2] || fd[0] > ed[0] || fd[1] > ed[1]){
+					$.datepicker._clearDate(end);
+				}
+			}
 
 			end.datepicker({
 				gotoCurrent: true,
-				minDate: date,
-				onSelect(){
+				minDate: sdate,
+				onSelect(dt){
+					edate = dt;
 					this.bothSelected = true;
 				}
 			});
