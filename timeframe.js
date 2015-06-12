@@ -28,7 +28,7 @@ var cal = function(strt, nd, startButt, endButt){
 	}
 	start.datepicker({
 		gotoCurrent: true,
-		onSelect(dateText){
+		onSelect: function(dateText){
 			sdate = dateText;
 			calendar.firstSelected = true;
 			if(endDate() !== null){
@@ -43,7 +43,7 @@ var cal = function(strt, nd, startButt, endButt){
 			end.datepicker({
 				gotoCurrent: true,
 				minDate: sdate,
-				onSelect(dt){
+				onSelect: function(dt){
 					edate = dt;
 					calendar.bothSelected = true;
 				}
