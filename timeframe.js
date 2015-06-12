@@ -5,7 +5,7 @@
 //associated button
 //ending cal
 //associated button
-var cal = function(strt, startButt, nd, endButt){
+var cal = function(strt, nd, startButt, endButt){
 	var start = strt,
 		startButton = startButt,
 	    end = nd,
